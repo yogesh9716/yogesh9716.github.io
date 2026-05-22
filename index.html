@@ -86,6 +86,81 @@ nav {
 }
 .nav-links a:hover { opacity: 1; color: var(--gold); }
 
+/* ── DROPDOWN ── */
+.nav-dropdown { position: relative; }
+.nav-dropdown > a {
+  display: flex; align-items: center; gap: 5px;
+}
+.nav-dropdown > a::after {
+  content: '▾';
+  font-size: 10px;
+  transition: transform 0.2s;
+  opacity: 0.6;
+}
+.nav-dropdown:hover > a::after { transform: rotate(180deg); opacity: 1; }
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10,15,30,0.97);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--gold);
+  min-width: 220px;
+  padding: 8px 0;
+  list-style: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-8px);
+  transition: opacity 0.2s, transform 0.2s;
+  backdrop-filter: blur(12px);
+  z-index: 200;
+}
+.nav-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+}
+.dropdown-menu li a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.7);
+  text-decoration: none;
+  opacity: 1;
+  border-left: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, padding 0.2s;
+  white-space: nowrap;
+}
+.dropdown-menu li a:hover {
+  color: var(--gold);
+  border-left-color: var(--gold);
+  background: rgba(201,168,76,0.07);
+  padding-left: 26px;
+}
+.dropdown-menu li a .menu-icon {
+  font-size: 14px; flex-shrink: 0;
+}
+.dropdown-menu li a .menu-badge {
+  margin-left: auto;
+  font-size: 9px;
+  padding: 2px 6px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+  border-radius: 2px;
+  letter-spacing: 1px;
+}
+.dropdown-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 6px 0;
+}
+
 /* ── HERO ── */
 #hero {
   min-height: 100vh;
@@ -523,6 +598,26 @@ footer .footer-links a:hover { color: var(--gold); }
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li class="nav-dropdown">
+      <a href="#">Study With Me</a>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="https://yogesh9716.github.io/pl400-study-guide/" target="_blank">
+            <span class="menu-icon">📘</span>
+            PL-400 Complete Guide
+            <span class="menu-badge">NEW</span>
+          </a>
+        </li>
+        <div class="dropdown-divider"></div>
+        <li>
+          <a href="#" style="opacity:0.4; pointer-events:none; cursor:default;">
+            <span class="menu-icon">☁️</span>
+            AZ-204 Guide
+            <span class="menu-badge" style="background:rgba(100,100,100,0.15);border-color:rgba(100,100,100,0.3);color:#666">SOON</span>
+          </a>
+        </li>
+      </ul>
+    </li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -792,9 +887,70 @@ footer .footer-links a:hover { color: var(--gold); }
   </div>
 </section>
 
+<!-- STUDY WITH ME -->
+<section id="study" style="background: rgba(201,168,76,0.03);">
+  <div class="section-label">05 — Knowledge Sharing</div>
+  <h2 class="section-title">STUDY<br>WITH ME</h2>
+
+  <p style="font-size:16px;color:rgba(245,240,232,0.6);max-width:580px;font-weight:300;line-height:1.8;margin-bottom:48px;">
+    I document everything I learn — deeply, with real code examples and exam traps flagged.
+    Free resources for the Microsoft developer community.
+  </p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px;">
+
+    <!-- PL-400 Card -->
+    <a href="https://yogesh9716.github.io/pl400-study-guide/" target="_blank"
+       style="display:block;text-decoration:none;background:rgba(245,240,232,0.03);border:1px solid rgba(201,168,76,0.2);padding:40px;position:relative;overflow:hidden;transition:all 0.3s;"
+       onmouseover="this.style.background='rgba(201,168,76,0.07)';this.style.borderColor='rgba(201,168,76,0.4)'"
+       onmouseout="this.style.background='rgba(245,240,232,0.03)';this.style.borderColor='rgba(201,168,76,0.2)'">
+
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2))"></div>
+
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+        <div style="font-size:36px;">📘</div>
+        <div>
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Microsoft Certification</div>
+          <div style="display:inline-block;padding:2px 10px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:1px;">PL-400</div>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--display);font-size:26px;letter-spacing:1px;color:var(--paper);margin-bottom:12px;line-height:1.1;">
+        Power Platform Developer<br>Complete Guide
+      </h3>
+
+      <p style="font-size:14px;color:rgba(245,240,232,0.6);line-height:1.7;font-weight:300;margin-bottom:28px;">
+        8 chapters covering Dataverse plugins, PCF controls, Power Apps, Power Automate, Graph API, ALM pipelines, and ALM. 30 practice questions with instant feedback. Full C# and TypeScript code samples.
+      </p>
+
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;">
+        <span style="padding:3px 9px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);font-size:11px;font-family:var(--mono);color:var(--gold2);">C# Plugins</span>
+        <span style="padding:3px 9px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);font-size:11px;font-family:var(--mono);color:var(--gold2);">PCF · TypeScript</span>
+        <span style="padding:3px 9px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);font-size:11px;font-family:var(--mono);color:var(--gold2);">Power Automate</span>
+        <span style="padding:3px 9px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);font-size:11px;font-family:var(--mono);color:var(--gold2);">ALM · CI/CD</span>
+        <span style="padding:3px 9px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);font-size:11px;font-family:var(--mono);color:var(--gold2);">30 Practice Qs</span>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;">
+        Open Free Guide
+        <span style="transition:transform 0.2s;">↗</span>
+      </div>
+    </a>
+
+    <!-- Coming Soon Card -->
+    <div style="background:rgba(245,240,232,0.01);border:1px solid rgba(245,240,232,0.05);padding:40px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:300px;">
+      <div style="font-size:32px;margin-bottom:16px;opacity:0.3;">☁️</div>
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,0.2);margin-bottom:8px;">Coming Soon</div>
+      <h3 style="font-family:var(--display);font-size:22px;letter-spacing:1px;color:rgba(245,240,232,0.2);margin-bottom:8px;">AZ-204 Guide</h3>
+      <p style="font-size:13px;color:rgba(245,240,232,0.2);font-weight:300;">Azure Developer Associate<br>Targeting Q1 2027</p>
+    </div>
+
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-label" style="justify-content:center">05 — Contact</div>
+  <div class="section-label" style="justify-content:center">06 — Contact</div>
   <h2 class="contact-tagline">LET'S BUILD<br>SOMETHING <span class="gold">GREAT</span></h2>
   <p class="contact-sub">Open to consulting on SharePoint migrations, SPFx development, Power Platform architecture, and Dataverse plugin development.</p>
   <div class="contact-links">
