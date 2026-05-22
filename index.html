@@ -137,9 +137,15 @@ h1.pname{font-size:24px;font-weight:700;color:var(--text);letter-spacing:-0.4px}
 .side-title{font-size:16px;font-weight:600;margin-bottom:13px}
 
 /* LinkedIn badge card */
-.linkedin-badge-card{padding:16px;text-align:center}
+.linkedin-badge-card{padding:16px;text-align:center;overflow:hidden;position:relative}
 .li-badge-label{display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:14px}
-.linkedin-badge-card .badge-base{display:flex;justify-content:center}
+.linkedin-badge-card .badge-base{display:flex;justify-content:center;align-items:center;width:100%;min-height:280px;position:relative;overflow:hidden}
+.linkedin-badge-card .badge-base iframe,
+.linkedin-badge-card .LI-profile-badge iframe{margin:0 auto !important;max-width:100% !important;border:none !important;position:relative !important}
+/* Hide the raw fallback link once the real iframe has rendered */
+.linkedin-badge-card .badge-base:has(iframe) .badge-base__link{display:none !important}
+/* Fallback styling if iframe never loads (no :has support / blocked) */
+.linkedin-badge-card .badge-base__link{display:inline-block;color:var(--blue);font-weight:500;font-size:14px;text-align:center}
 
 /* Featured PL-400 card */
 .featured-card{background:linear-gradient(160deg,#fff 0%,#fdf6e3 100%);border:1px solid var(--gold);text-align:center;padding:24px 20px}
@@ -527,6 +533,19 @@ setTimeout(function() {
   s.defer = true;
   s.type = 'text/javascript';
   document.body.appendChild(s);
+
+  // Watch for the LinkedIn iframe; once it appears, hide the raw fallback link
+  // so the "Yogesh Yadav" text doesn't float outside the card.
+  var checks = 0;
+  var watcher = setInterval(function() {
+    var iframe = document.querySelector('.linkedin-badge-card iframe');
+    var link = document.querySelector('.linkedin-badge-card .badge-base__link');
+    if (iframe && link) {
+      link.style.display = 'none';
+      clearInterval(watcher);
+    }
+    if (++checks > 30) clearInterval(watcher); // give up after ~6s, keep fallback
+  }, 200);
 }, 300);
 </script>
 </body>
