@@ -18,7 +18,7 @@
   --gold:#c9a84c;--gold-light:#e8c97a;--navy:#0f3460;--green:#057642;
   --radius:10px;--sans:'Inter',sans-serif;
 }
-body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:var(--blue);text-decoration:none}
 a:hover{text-decoration:underline}
 button{font-family:var(--sans);cursor:pointer}
@@ -175,19 +175,66 @@ h1.pname{font-size:24px;font-weight:700;color:var(--text);letter-spacing:-0.4px}
 .footer-links a{color:var(--muted);font-weight:500}
 .footer-links a:hover{color:var(--blue)}
 
-/* MOBILE */
+/* ─── RESPONSIVE ─── */
+
+/* Tablet & below: stack sidebar under main content (don't hide it!) */
 @media(max-width:900px){
-  .page{grid-template-columns:1fr}
-  .sidebar{display:none}
+  .page{grid-template-columns:1fr;max-width:680px}
+  .sidebar{margin-top:0}
+  .pactions{flex-wrap:wrap}
 }
-@media(max-width:540px){
+
+/* Large phone */
+@media(max-width:600px){
+  .page{padding:14px 12px}
+  .section{padding:18px 18px}
+  .profile-head{padding:0 18px 20px}
+  .cover{height:130px}
+  .cover-badges{top:10px;right:10px;gap:7px}
+  .cover-badge{padding:6px 9px}
+  .cover-badge .cb-icon{width:26px;height:26px}
+  .cover-badge .cb-name{font-size:10px}
+  .cover-badge .cb-org{font-size:8px}
+  .avatar{width:104px;height:104px;font-size:34px;margin-top:-52px}
   .skills{grid-template-columns:1fr}
-  .avatar{width:96px;height:96px;font-size:32px;margin-top:-48px}
-  .cover{height:120px}
-  .cover-badges{flex-direction:column;gap:6px;top:10px;right:10px}
-  h1.pname{font-size:20px}
-  .avatar-row{flex-direction:column;align-items:flex-start;gap:0}
-  .more-menu{left:auto;right:0}
+  .pactions{gap:8px}
+  .btn{padding:8px 16px;font-size:13px}
+  h1.pname{font-size:21px}
+  .pheadline{font-size:14px}
+}
+
+/* Small phone */
+@media(max-width:430px){
+  .page{padding:10px 8px}
+  .section{padding:16px 14px}
+  .profile-head{padding:0 14px 18px}
+  .cover{height:100px}
+  .cover-badges{flex-direction:column;top:8px;right:8px;gap:5px}
+  .cover-badge{padding:5px 8px}
+  .cover-badge .cb-text{display:none}
+  .cover-badge .cb-icon{width:28px;height:28px}
+  .avatar{width:88px;height:88px;font-size:28px;margin-top:-44px;border-width:3px}
+  .verified{width:28px;height:28px;bottom:4px;right:2px}
+  .verified svg{width:15px;height:15px}
+  h1.pname{font-size:19px}
+  .profile-name-row{gap:6px}
+  .pl-verified-inline{font-size:10px;padding:2px 7px}
+  .pheadline{font-size:13px}
+  .pmeta{font-size:12px}
+  .pbadge{font-size:11px}
+  /* Action buttons: full-width stacked for easy tapping */
+  .pactions{flex-direction:column}
+  .pactions>.btn,.pactions>.more-dd{width:100%}
+  .pactions>.more-dd .btn{width:100%;justify-content:center}
+  .btn{justify-content:center;padding:10px 16px}
+  .more-menu{left:0;right:0;min-width:0;width:100%}
+  .sec-title{font-size:17px}
+  .sec-title .add{font-size:12px}
+  .exp{gap:11px}
+  .exp-logo{width:42px;height:42px;font-size:10px}
+  .exp-title{font-size:15px}
+  .rec-head{gap:10px}
+  .rec-av{width:42px;height:42px;font-size:13px}
 }
 </style>
 </head>
