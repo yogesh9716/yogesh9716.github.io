@@ -136,6 +136,11 @@ h1.pname{font-size:24px;font-weight:700;color:var(--text);letter-spacing:-0.4px}
 .side-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;padding:18px}
 .side-title{font-size:16px;font-weight:600;margin-bottom:13px}
 
+/* LinkedIn badge card */
+.linkedin-badge-card{padding:16px;text-align:center}
+.li-badge-label{display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:14px}
+.linkedin-badge-card .badge-base{display:flex;justify-content:center}
+
 /* Featured PL-400 card */
 .featured-card{background:linear-gradient(160deg,#fff 0%,#fdf6e3 100%);border:1px solid var(--gold);text-align:center;padding:24px 20px}
 .featured-icon{font-size:38px;margin-bottom:10px}
@@ -248,7 +253,7 @@ function ProfileCard() {
           <a className="btn btn-primary" href="mailto:ysyadav54@gmail.com">
             <Icon d={icons.mail}/> Contact
           </a>
-          <a className="btn btn-outline" href="https://www.linkedin.com/in/yogesh-yadav" target="_blank">
+          <a className="btn btn-outline" href="https://www.linkedin.com/in/yogesh-yadav-9171a8175" target="_blank">
             <Icon d={icons.link}/> Message
           </a>
           <div className="more-dd">
@@ -415,6 +420,21 @@ const usefulLinks = [
 function Sidebar() {
   return (
     <aside className="sidebar">
+      {/* Official LinkedIn profile badge — auto-populated by LinkedIn's script */}
+      <div className="side-card linkedin-badge-card">
+        <div className="li-badge-label">
+          <svg viewBox="0 0 24 24" style={{width:16,height:16,fill:'#0a66c2'}}><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn Profile
+        </div>
+        <div className="badge-base LI-profile-badge"
+             data-locale="en_US" data-size="medium" data-theme="light"
+             data-type="VERTICAL" data-vanity="yogesh-yadav-9171a8175" data-version="v1">
+          <a className="badge-base__link LI-simple-link"
+             href="https://ae.linkedin.com/in/yogesh-yadav-9171a8175?trk=profile-badge"
+             target="_blank">Yogesh Yadav</a>
+        </div>
+      </div>
+
       {/* Featured PL-400 study guide */}
       <div className="side-card featured-card">
         <div className="featured-icon">📘</div>
@@ -467,7 +487,7 @@ function Footer() {
     <footer className="footer" id="contact">
       <div className="footer-links">
         <a href="mailto:ysyadav54@gmail.com">Contact</a>
-        <a href="https://www.linkedin.com/in/yogesh-yadav" target="_blank">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/yogesh-yadav-9171a8175" target="_blank">LinkedIn</a>
         <a href="https://github.com/yogesh9716" target="_blank">GitHub</a>
         <a href="https://yogesh9716.github.io/pl400-study-guide/" target="_blank">PL-400 Guide</a>
       </div>
@@ -497,6 +517,17 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+
+// Load LinkedIn badge script AFTER React has rendered the badge div.
+// (LinkedIn's script scans the DOM on load, so it must run after the div exists.)
+setTimeout(function() {
+  var s = document.createElement('script');
+  s.src = 'https://platform.linkedin.com/badges/js/profile.js';
+  s.async = true;
+  s.defer = true;
+  s.type = 'text/javascript';
+  document.body.appendChild(s);
+}, 300);
 </script>
 </body>
 </html>
